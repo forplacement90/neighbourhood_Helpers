@@ -2,11 +2,6 @@ import mongoose, { Schema } from "mongoose";
 
 const workspaceSchema = new Schema(
   {
-    _id: {
-      type: String,
-      required: true,
-      trim: true
-    },
     folderId: {
       type: String,
       required: true,

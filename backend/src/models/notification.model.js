@@ -2,11 +2,6 @@ import mongoose, { Schema } from "mongoose";
 
 const notificationSchema = new Schema(
   {
-    _id: {
-      type: String,
-      required: true,
-      trim: true
-    },
     userId: {
       type: String,
       required: true,

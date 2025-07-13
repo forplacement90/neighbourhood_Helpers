@@ -2,10 +2,6 @@ import mongoose, { Schema } from "mongoose";
 
 const issueSchema = new Schema(
   {
-    _id: {
-      type: String, 
-      required: true
-    },
     title: {
       type: String,
       required: true,

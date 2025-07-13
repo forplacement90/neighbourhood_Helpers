@@ -2,11 +2,6 @@ import mongoose, { Schema } from "mongoose";
 
 const imageSchema = new Schema(
   {
-    _id: {
-      type: String,
-      required: true,
-      trim: true
-    },
     url: {
       type: String,
       required: true,

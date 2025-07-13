@@ -2,11 +2,6 @@ import mongoose, { Schema } from "mongoose";
 
 const analyticsSchema = new Schema(
   {
-    _id: {
-      type: String,
-      required: true,
-      trim: true
-    },
     issueId: {
       type: String,
       required: true,

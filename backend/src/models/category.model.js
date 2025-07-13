@@ -3,10 +3,6 @@ import mongoose, { Schema } from "mongoose";
 // Define the Category Schema
 const categorySchema = new Schema(
   {
-    _id: {
-      type: String, 
-      required: true
-    },
     name: {
       type: String,
       required: [true, "Category name is required"],
