@@ -344,13 +344,13 @@ const getUserById = asyncHandler(async (req, res) => {
 });
 
 // Get all users
-const getAllUsers = asyncHandler(async (req, res) => {
+const getAllUsersTeamRole= asyncHandler(async (req, res) => {
   const users = await User.find().populate("teams");
   return res.status(200).json(new ApiResponse(200, users, "All users fetched successfully"));
 });
 
 //Update user
-const updateUser = asyncHandler(async (req, res) => {
+const updateUserRole = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { team_role, teams } = req.body;
 
@@ -405,7 +405,7 @@ export {
     updateUserAvatar,
     updateUserCoverImage,
     getUserById,
-    updateUser,
+    updateUserRole,
     deleteUser,
-    getAllUsers,
+    getAllUsersTeamRole,
 }
