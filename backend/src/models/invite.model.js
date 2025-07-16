@@ -15,12 +15,12 @@ const inviteSchema = new Schema(
       trim: true
     },
     workspaceId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Workspace"
     },
     inviterId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User"
     }

@@ -12,12 +12,12 @@ const issueSchema = new Schema(
       required: true
     },
     categoryId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Category"
     },
     userId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User"
     },
@@ -57,7 +57,7 @@ const issueSchema = new Schema(
     },
     languageId: {
       type: String,
-      required: true
+      required: false
     }
   },
   {

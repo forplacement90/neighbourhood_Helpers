@@ -3,12 +3,12 @@ import mongoose, { Schema } from "mongoose";
 const workspaceSchema = new Schema(
   {
     folderId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Folder"
     },
     teamId: {
-      type: String,
+     type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Team"
     }

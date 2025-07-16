@@ -3,12 +3,12 @@ import mongoose, { Schema } from "mongoose";
 const commentSchema = new Schema(
   {
     userId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User"
     },
     issueId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Issue"
     },

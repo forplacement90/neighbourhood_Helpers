@@ -16,9 +16,11 @@ app.use(cookieParser())
 
 //routes import
 import userRouter from "./routes/user.routes.js"
+import upvoteRouter from "./routes/upvote.routes.js"
 
 //routes decleration
 app.use("/api/v1/users", userRouter)
+app.use("/api/v1/upvote", upvoteRouter)
 
 // http://localhost:8000/api/v1/users/register-- (example ase bhejna hn)
 

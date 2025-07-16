@@ -12,7 +12,7 @@ const imageSchema = new Schema(
       default: Date.now
     },
     uploadedBy: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User"
     }

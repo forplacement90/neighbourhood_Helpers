@@ -3,12 +3,12 @@ import mongoose, { Schema } from "mongoose";
 const analyticsSchema = new Schema(
   {
     issueId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Issue"
     },
     categoryId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Category"
     },
