@@ -11,11 +11,6 @@ const issueSchema = new Schema(
       type: String,
       required: true
     },
-    categoryId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Category"
-    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
