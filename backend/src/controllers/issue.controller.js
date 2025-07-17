@@ -2,9 +2,9 @@ import { Issue } from "../models/issue.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { uploadOnCloudinary,deleteFromCloudinary } from "../utils/cloudinary.js";
 
-export const createIssue = asyncHandler(async (req, res) => {
+const createIssue = asyncHandler(async (req, res) => {
   const {
     title,
     description,
@@ -44,7 +44,7 @@ export const createIssue = asyncHandler(async (req, res) => {
   );
 });
 
-export const getAllIssues = asyncHandler(async (req, res) => {
+const getAllIssues = asyncHandler(async (req, res) => {
   const issues = await Issue.find()
     .populate("userId", "username email")
     .sort({ createdAt: -1 });
@@ -54,7 +54,7 @@ export const getAllIssues = asyncHandler(async (req, res) => {
   );
 });
 
-export const getIssueById = asyncHandler(async (req, res) => {
+const getIssueById = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   const issue = await Issue.findById(id)
@@ -68,7 +68,7 @@ export const getIssueById = asyncHandler(async (req, res) => {
 });
 
 
-export const updateIssue = asyncHandler(async (req, res) => {
+const updateIssue = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   const issue = await Issue.findById(id);
@@ -80,8 +80,22 @@ export const updateIssue = asyncHandler(async (req, res) => {
     throw new ApiError(403, "You are not authorized to update this issue");
   }
 
-  const updates = req.body;
-  Object.assign(issue, updates);
+  // Handle image update
+  if (req.file) {
+    // Delete old image from Cloudinary
+    if (issue.imageId) {
+      await deleteFromCloudinary(issue.imageId);
+    }
+
+    const uploadedImage = await uploadOnCloudinary(req.file.path);
+    if (!uploadedImage) {
+      throw new ApiError(500, "New image upload failed");
+    }
+    issue.imageId = uploadedImage.public_id;
+  }
+
+  // Apply other updates
+  Object.assign(issue, req.body);
 
   await issue.save();
 
@@ -91,7 +105,7 @@ export const updateIssue = asyncHandler(async (req, res) => {
 });
 
 
-export const deleteIssue = asyncHandler(async (req, res) => {
+const deleteIssue = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   const issue = await Issue.findById(id);
@@ -103,9 +117,24 @@ export const deleteIssue = asyncHandler(async (req, res) => {
     throw new ApiError(403, "You are not authorized to delete this issue");
   }
 
+  // Delete image from Cloudinary
+  if (issue.imageId) {
+    await deleteFromCloudinary(issue.imageId);
+  }
+
   await issue.deleteOne();
 
   res.status(200).json(
     new ApiResponse(200, null, "Issue deleted successfully")
   );
 });
+
+export {
+  createIssue,
+  getAllIssues,
+  getIssueById,
+  updateIssue,
+  deleteIssue
+};
+
+

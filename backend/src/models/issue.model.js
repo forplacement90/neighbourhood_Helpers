@@ -24,7 +24,7 @@ const issueSchema = new Schema(
     },
     imageId: {
       type: String, // Could be a Cloudinary ID or URL
-      ref: "Image"
+      default: ""
     },
     location: {
       type: String

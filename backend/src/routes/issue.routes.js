@@ -11,10 +11,15 @@ import { upload } from "../middlewares/multer.middleware.js";
 
 const router = express.Router();
 
+// Create Issue with optional image
 router.post("/", verifyJWT, upload.single("image"), createIssue);
+// Get all issues
 router.get("/", getAllIssues);
+// Get single issue
 router.get("/:id", getIssueById);
-router.put("/:id", verifyJWT, updateIssue);
+// Update issue with optional new image
+router.put("/:id", verifyJWT, upload.single("image"), updateIssue);
+// Delete issue (and its image)
 router.delete("/:id", verifyJWT, deleteIssue);
 
 export default router;
