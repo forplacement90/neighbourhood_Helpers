@@ -18,11 +18,27 @@ app.use(cookieParser())
 import userRouter from "./routes/user.routes.js"
 import upvoteRouter from "./routes/upvote.routes.js"
 import issueRouter from "./routes/issue.routes.js";
+import notificationRouter from "./routes/notification.routes.js"
+import eventRouter from "./routes/event.routes.js"
+import commentRouter from "./routes/comment.routes.js"
+import attendanceRouter from "./routes/attendance.routes.js"
+import analyticsRouter from "./routes/analytics.routes.js"
+
+
 
 //routes decleration
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/upvotes", upvoteRouter)
 app.use("/api/v1/issues", issueRouter);
+app.use("/api/v1/notifications", notificationRouter);
+app.use("/api/v1/events", eventRouter );
+app.use("/api/v1/comments", commentRouter);
+app.use("/api/v1/attendance", attendanceRouter);
+app.use("/api/v1/analytics", analyticsRouter);
+
+
+
+
 
 // http://localhost:8000/api/v1/users/register-- (example ase bhejna hn)
 

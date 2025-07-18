@@ -8,12 +8,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    teams: [
-      {
-        type: String,
-        ref: "Team", 
-      }
-    ],
     username: {
       type: String,
       required: true,

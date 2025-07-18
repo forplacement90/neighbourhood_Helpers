@@ -5,12 +5,8 @@ const analyticsSchema = new Schema(
     issueId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Issue"
-    },
-    categoryId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Category"
+      ref: "Issue",
+      unique: true
     },
     upvoteCount: {
       type: Number,
@@ -22,7 +18,10 @@ const analyticsSchema = new Schema(
     }
   },
   {
-    timestamps: { createdAt: true, updatedAt: false },
+    timestamps: {
+      createdAt: true,
+      updatedAt: true
+    },
     versionKey: false
   }
 );
