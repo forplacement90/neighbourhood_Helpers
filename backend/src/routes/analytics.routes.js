@@ -5,19 +5,21 @@ import {
   incrementComment,
   getAnalytics
 } from "../controllers/analytics.controller.js";
+import { isAdmin } from "../middlewares/isAdmin.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
 // Init analytics for a new issue
-router.post("/init/:issueId", createAnalytics);
+router.post("/init/:issueId", verifyJWT, createAnalytics);
 
 // Increment upvote count
-router.patch("/upvote/:issueId", incrementUpvote);
+router.patch("/upvote/:issueId",  incrementUpvote);
 
 // Increment comment count
-router.patch("/comment/:issueId", incrementComment);
+router.patch("/comment/:issueId",  incrementComment);
 
 // Get analytics for an issue
-router.get("/:issueId", getAnalytics);
+router.get("/:issueId", isAdmin ,getAnalytics);
 
 export default router;

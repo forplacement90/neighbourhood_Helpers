@@ -6,14 +6,14 @@ import {
   updateEvent,
   deleteEvent
 } from "../controllers/event.controller.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { isAdmin } from "../middlewares/isAdmin.js";
 
 const router = express.Router();
 
-router.post("/", verifyJWT, createEvent);
-router.get("/", getAllEvents);
-router.get("/:id", getEventById);
-router.put("/:id", verifyJWT, updateEvent);
-router.delete("/:id", verifyJWT, deleteEvent);
+router.post("/", isAdmin, createEvent);
+router.get("/", isAdmin, getAllEvents);
+router.get("/:id",isAdmin, getEventById);
+router.put("/:id", isAdmin, updateEvent);
+router.delete("/:id", isAdmin, deleteEvent);
 
 export default router;

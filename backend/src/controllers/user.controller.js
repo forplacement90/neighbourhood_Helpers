@@ -23,7 +23,15 @@ const generateAccessAndRefereshTokens = async(userId) =>{
 }
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { fullName, email, team_role, teams, username, password } = req.body;
+  const { fullName, email, team_role, username, password } = req.body;
+
+    // Prevent anyone from registering as "admin"
+  if (team_role?.toLowerCase() === "admin") {
+    return res.status(403).json({
+      message: "You are not allowed to register with admin privileges.",
+    });
+  }
+
 
   // Validate required fields
   if (

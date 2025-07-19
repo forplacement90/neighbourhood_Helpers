@@ -17,6 +17,7 @@ import {
 
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { isAdmin } from "../middlewares/isAdmin.js";
 
 const router = Router();
 
@@ -41,15 +42,15 @@ router.route("/update-account").patch(verifyJWT, updateAccountDetails);
 // File uploads
 router
   .route("/avatar")
-  .patch(verifyJWT, upload.single("avatar"), updateUserAvatar);
+  .patch(verifyJWT, upload.single("avatar"), verifyJWT, updateUserAvatar);
 router
   .route("/cover-image")
-  .patch(verifyJWT, upload.single("coverImage"), updateUserCoverImage);
+  .patch(verifyJWT, upload.single("coverImage"), verifyJWT, updateUserCoverImage);
 
 // Admin/User role management
-router.route("/c/:username").get(verifyJWT, getUserById);
-router.route("/update-user-role").patch(verifyJWT, updateUserRole);
+router.route("/c/:username").get(isAdmin, getUserById);
+router.route("/update-user-role").patch(isAdmin, updateUserRole);
 router.route("/:id/delete-user").delete(verifyJWT, deleteUser);
-router.route("/team-roles").get(verifyJWT, getAllUsersTeamRole);
+router.route("/team-roles").get(isAdmin, getAllUsersTeamRole);
 
 export default router;

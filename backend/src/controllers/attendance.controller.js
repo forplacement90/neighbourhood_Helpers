@@ -57,13 +57,20 @@ export const getAllAttendance = async (req, res) => {
 export const getUserAttendance = async (req, res) => {
   try {
     const { userId } = req.params;
-    const records = await Attendance.find({ userId })
-      .populate("eventId", "name startTime");
+
+    //  Strict check: only allow the actual user to access
+    if (req.user._id.toString() !== userId) {
+      return res.status(403).json({ message: "Access denied. You can only view your own attendance." });
+    }
+
+    const records = await Attendance.find({ userId }).populate("eventId", "name startTime");
+
     res.status(200).json(records);
   } catch (err) {
     res.status(500).json({ message: "Error fetching user attendance.", error: err.message });
   }
 };
+
 
 // 5. Get Attendance by Event
 export const getEventAttendance = async (req, res) => {

@@ -23,6 +23,10 @@ import eventRouter from "./routes/event.routes.js"
 import commentRouter from "./routes/comment.routes.js"
 import attendanceRouter from "./routes/attendance.routes.js"
 import analyticsRouter from "./routes/analytics.routes.js"
+import emailRoutes from "./routes/email.routes.js";
+import chatbotRoutes from "./routes/chatbot.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
+import sosAlertRoutes from "./routes/sosAlert.routes.js";
 
 
 
@@ -35,6 +39,10 @@ app.use("/api/v1/events", eventRouter );
 app.use("/api/v1/comments", commentRouter);
 app.use("/api/v1/attendance", attendanceRouter);
 app.use("/api/v1/analytics", analyticsRouter);
+app.use("/api/v1/email", emailRoutes);
+app.use("/api/v1/chatbot", chatbotRoutes);
+app.use("/api/v1/admin", adminRoutes);
+app.use("/api/v1/sos", sosAlertRoutes);
 
 
 
