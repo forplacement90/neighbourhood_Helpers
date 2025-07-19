@@ -10,7 +10,7 @@ export const sendEmail = async ({ to, subject, html }) => {
   });
 
   const mailOptions = {
-    from: `"Event Organizer" <${process.env.EMAIL_USER}>`,
+    from: `"Neighborhood Helper" <${process.env.EMAIL_USER}>`,
     to, 
     subject,
     html,

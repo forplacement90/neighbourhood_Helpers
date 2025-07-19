@@ -27,11 +27,13 @@ import emailRoutes from "./routes/email.routes.js";
 import chatbotRoutes from "./routes/chatbot.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import sosAlertRoutes from "./routes/sosAlert.routes.js";
+import otpRoutes from "./routes/otp.routes.js";
 
 
 
 //routes decleration
 app.use("/api/v1/users", userRouter)
+app.use("/api/v1/otp", otpRoutes); 
 app.use("/api/v1/upvotes", upvoteRouter)
 app.use("/api/v1/issues", issueRouter);
 app.use("/api/v1/notifications", notificationRouter);

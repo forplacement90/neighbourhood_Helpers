@@ -5,7 +5,7 @@ import { Attendance } from "../models/attendence.model.js";
 export const markAttendance = async (req, res) => {
   try {
     const { eventId } = req.body;
-    const userId = req.user._id; // Assuming verifyToken sets req.user
+    const userId = req.user._id; 
 
     const existing = await Attendance.findOne({ eventId, userId });
     if (existing) {
